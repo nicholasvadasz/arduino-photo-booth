@@ -1,38 +1,14 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.img-container {
+  border-image:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAAAXNSR0IArs4c6QAAAiRJREFUeF7tm0FuwzAMBG30z31E/1yk6K1VARMDLhUHnVy9pqjRUjaV5Dz8RAmc0WgGOwQaNoFABRomEA6nQwUaJhAOp0MFGiYQDqdDBRomEA6nQ18d6OfH4/FzDm/v5+WiTuvDPPe3ntOAaHyBhh0tUIFee2At0VW97rFUn3ZgFe/pT3kKiOorAOnrAg0TFeh/A0rnW73X0nhUf3uH0gkJdOmcKMDqraAbj96vQymxQr8dKG0Np/VhnvbyArX1/O2B6RKm8Z/uUJow1acnSMen+jVf/FCiA1K9QG++p9EFpXodOmwAXPLritz9OG13vgJdiHfPAgQq0N57wPQWpUN1qA5tV0EP4XXrmz5PbU92ek9KwvyONZ0vBlp1EtMJU8A0n2p+1fgCXTongRaW0aFVTcHrtwe6uzeG/Eo5BVwGXAR4DxXoNWKB2inRIvTFvkcs/NSnyVjyljz1jCXfI/ZqJU9bM6pP06TjU/2aL95D6YBUL9Dhr2W7gOmCUr0OHTYALvm7O6brsO78BNolmD4coflQB03raf6VXodWhOD17UDp8R+cz9H9KQ0dr/2U7w4o0DTBJV51gk6H16H+8Yt65lpfOdT/y0PeAoXAKrlAK0LwukAhsOo1qXoq2ykVwKcB0fhNf/y5fXunRCc8rRfo8HlmF/B2h3YTvvv9Ag2vkEAFGiYQDqdDBRomEA6nQwUaJhAOp0MFGiYQDqdDBRomEA73BUlqYHM2PBuYAAAAAElFTkSuQmCC") 28 /  28px / 0 round;
+    border-width:  28px;
+    border-style:  solid;
 }
