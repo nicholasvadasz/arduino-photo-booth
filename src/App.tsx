@@ -13,7 +13,7 @@ function App() {
       .then((text) => {
         const variables = text.split(" ");
         setVariables([variables[0] as unknown as number, variables[1] as unknown as number]);
-        setVersion(variables[2].trim());
+        //setVersion(variables[2].trim());
       });
   }, []);
 
