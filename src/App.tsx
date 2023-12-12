@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const [variables, setVariables] = useState([0, 0]);
@@ -17,6 +17,8 @@ function App() {
         return "blur";
       case 4:
         return "invert";
+      case 5:
+        return "no filter";
       default:
         return "no filter";
     }
@@ -56,17 +58,35 @@ function App() {
       window.location.reload();
   } 
 
+  const imageRef = useRef();
+
+  const saveImageWithFilters = () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const image = imageRef.current as unknown as HTMLImageElement;
+    canvas.width = image.width;
+    canvas.height = image.height;
+    ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    ctx!.filter = image.style.filter;
+    ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const link = document.createElement("a");
+    link.download = "filtered-image.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+
   return (
     <div className="App">
       <h1 style={{ fontFamily: "Comic Sans MS" }}>ARDUINO PHOTOBOOTH</h1>
       <div className="outerBevel">
         <div className="flatSurface">
-          <div className="innerBevel" style={{ height: "59.5vh", width: "50vw" }}>
-          <img src={imagePath} alt="Photobooth" style={imageStyle} />
+          <div className="innerBevel" style={{ height: "53.5vh", width: "50vw" }}>
+          <img src={imagePath} alt="Photobooth" style={imageStyle} ref={imageRef as any} />
           </div>
         </div>
       </div>
       <div className="rowOfThings" style={{ fontFamily: "Comic Sans MS" }}>
+          <button onClick={saveImageWithFilters} className="retrieveButton">Save Image</button>
           <h3>Current Filter: {version}</h3>
           <h3>Brightness: {variables[0] / 500}</h3>
           <h3>Saturation: {variables[1] / 500}</h3>
