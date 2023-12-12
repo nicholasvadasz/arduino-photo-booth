@@ -16,4 +16,4 @@ void catISR();
 void updateLEDs();
 void photoLedOn();
 void photoLedOff();
-state updateFSM(state curState, long mils);
+state updateFSM(state curState);

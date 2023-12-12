@@ -29,6 +29,7 @@ void setup() {
 }
 
 void loop() {
+  // runAllTests();
   Watchdog.reset();
   if (digitalRead(takePhotoButtonPin) == HIGH && CURRENT_STATE == sWAIT_FOR_INPUT) {
     takePhoto = true;
@@ -47,26 +48,26 @@ void loop() {
   }
 }
 
-void toggleFilter(filter currFilterSetting) {
+filter toggleFilter(filter currFilterSetting) {
   switch(currFilterSetting){
     case GRAYSCALE_FILTER:
       currFilterSetting = SEPIA_FILTER;
-      break;
+      return SEPIA_FILTER;
     case SEPIA_FILTER:
       currFilterSetting = BLUR_FILTER;
-      break;
+      return BLUR_FILTER;
     case BLUR_FILTER:
       currFilterSetting = INVERT_FILTER;
-      break;
+      return INVERT_FILTER;
     case INVERT_FILTER:
       currFilterSetting = NO_FILTER;
-      break;
+      return NO_FILTER;
     case NO_FILTER:
       currFilterSetting = GRAYSCALE_FILTER;
-      break;
+      return GRAYSCALE_FILTER;
     default:
       currFilterSetting = NO_FILTER;
-      break;
+      return NO_FILTER;
   }
 }
 
