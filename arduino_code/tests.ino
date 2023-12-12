@@ -20,9 +20,22 @@ bool testTransiton2_2() {
 
 }
 
-// test toggleFilter
 bool testToggleFilter() {
+  filter testFilter = GRAYSCALE_FILTER;
+  toggleFilter(testFilter);
+  if (testFilter != SEPIA_FILTER) {
+    Serial.print("Expected SEPIA_FILTER but got ");
+    Serial.println(testFilter);
+    return false;
+  }
 
+  testFilter = INVERT_FILTER;
+  toggleFilter(testFilter);
+  if (testFilter != NO_FILTER) {
+    Serial.print("Expected NO_FILTER but got ");
+    Serial.println(testFilter);
+    return false;
+  }
 }
 
 // test catISR

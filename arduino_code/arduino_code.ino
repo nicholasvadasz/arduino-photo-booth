@@ -34,7 +34,7 @@ void loop() {
     takePhoto = true;
   }
   if (digitalRead(toggleFilterButtonPin) == HIGH) {
-    toggleFilter();
+    toggleFilter(currFilterSetting);
   }
   updateLEDs();
   CURRENT_STATE = updateFSM(CURRENT_STATE);
@@ -47,7 +47,7 @@ void loop() {
   }
 }
 
-void toggleFilter() {
+void toggleFilter(filter currFilterSetting) {
   switch(currFilterSetting){
     case GRAYSCALE_FILTER:
       currFilterSetting = SEPIA_FILTER;
