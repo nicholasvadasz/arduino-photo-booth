@@ -9,21 +9,28 @@
   color: rgb(255, 255, 255);
 }
 
-
 /* CREDIT TO https://codepen.io/john_skowronski/pen/Egqqjy */
-.outerBevel { 
-	box-shadow:				4px 6px 12px 0 black;
-	border-width:			5px;
-	border-style:			solid;
-	border-color:			rgb(109, 84, 58) rgb(24, 19, 13) rgb(24, 19, 13) rgb(109, 84, 58);
-	}
+.outerBevel {
+  box-shadow: 4px 6px 12px 0 black;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(109, 84, 58) rgb(24, 19, 13) rgb(24, 19, 13) rgb(109, 84, 58);
+}
 
-.flatSurface { 
-	border:						12px solid rgb(65, 40, 16);
-	}
+.flatSurface {
+  border: 12px solid rgb(65, 40, 16);
+}
 
-.innerBevel { 
-	border-width:			5px;
-	border-style:			solid;
-	border-color:			rgb(24, 19, 13)	rgb(109, 84, 58) rgb(109, 84, 58) rgb(24, 19, 13);
-	}
+.innerBevel {
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(24, 19, 13) rgb(109, 84, 58) rgb(109, 84, 58) rgb(24, 19, 13);
+}
+
+.rowOfThings {
+  margin-top: 10px;
+  width: 40vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

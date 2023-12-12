@@ -3,8 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { TextureLoader } from 'three';
 import { Plane } from '@react-three/drei';
 
-const ShaderImage = ({ imagePath, version, variables }: { imagePath: string, version: string, variables: number[] }) => {
-
+const ShaderImage = ({ imagePath, version, variables, canvasRef }: { imagePath: string, version: string, variables: number[], canvasRef: React.RefObject<HTMLCanvasElement> }) => {
 // [0.0, 2.0] values for brightness and saturation
 const brightness = variables[0] / 500; 
 const saturation = variables[1] / 500; 
@@ -106,6 +105,26 @@ const mirror = {
   `
 };
 
+const noShader = {
+  ...baseShader,
+  fragmentShader: `
+    precision mediump float;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float uBrightness;
+    uniform float uSaturation;
+
+    ${adjustImage}
+
+    void main() {
+      vec4 color = texture2D(uTexture, vUv);
+      vec3 adjustedColor = adjustBrightness(color.rgb, uBrightness);
+      adjustedColor = adjustSaturation(adjustedColor, uSaturation);
+      gl_FragColor = vec4(adjustedColor, color.a);
+    }
+  `
+};
+
   var shader = grayscale;
   switch (version) {
     case "grayscale":
@@ -117,8 +136,11 @@ const mirror = {
     case "mirror":
       shader = mirror;
       break;
+    case "no filter":
+      shader = noShader;
+      break;
     default:
-      shader = swirl;
+      shader = noShader;
   }
 
   return (
