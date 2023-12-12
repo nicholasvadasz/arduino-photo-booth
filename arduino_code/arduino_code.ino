@@ -112,6 +112,14 @@ state updateFSM(state curState, unsigned long mils) {
         renderDone = false; 
       } else {
         nextState = sWAIT_FOR_ACK;
+        if (Serial.available() > 0){
+          String receivedData = Serial.readStringUntil('\n');
+          if (receivedData.equals("ack")) {
+            renderDone = true;
+          }
+      }
+        
+          
       }
       break;
     default:
