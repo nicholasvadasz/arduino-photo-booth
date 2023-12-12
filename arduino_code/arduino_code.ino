@@ -37,7 +37,7 @@ void loop() {
     toggleFilter();
   }
   updateLEDs();
-  CURRENT_STATE = updateFSM(CURRENT_STATE, millis());
+  CURRENT_STATE = updateFSM(CURRENT_STATE);
   delay(10);
   if (millis() - lastStateChangeTime >= stateTimeout) {
     // Call your ISR here
@@ -49,20 +49,20 @@ void loop() {
 
 void toggleFilter() {
   switch(currFilterSetting){
-    case NO_FILTER:
-      currFilterSetting = SWIRL_FILTER;
-      break;
-    case SWIRL_FILTER:
-      currFilterSetting = GRAYSCALE_FILTER;
-      break;
     case GRAYSCALE_FILTER:
-      currFilterSetting = MIRROR_FILTER;
+      currFilterSetting = SEPIA_FILTER;
       break;
-    case MIRROR_FILTER:
+    case SEPIA_FILTER:
+      currFilterSetting = BLUR_FILTER;
+      break;
+    case BLUR_FILTER:
       currFilterSetting = INVERT_FILTER;
       break;
     case INVERT_FILTER:
       currFilterSetting = NO_FILTER;
+      break;
+    case NO_FILTER:
+      currFilterSetting = GRAYSCALE_FILTER;
       break;
     default:
       currFilterSetting = NO_FILTER;
@@ -98,7 +98,7 @@ void photoLedOff() {
   digitalWrite(takingPhotoLedPin, LOW);
 }
 
-state updateFSM(state curState, unsigned long mils) {
+state updateFSM(state curState) {
   state nextState = curState;
   switch(curState) {
     case sWAIT_FOR_INPUT:
@@ -160,9 +160,7 @@ state updateFSM(state curState, unsigned long mils) {
           if (receivedData.equals("ack")) {
             renderDone = true;
           }
-      }
-        
-          
+        }
       }
       break;
     default:
