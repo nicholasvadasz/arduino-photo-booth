@@ -2,7 +2,7 @@ import serial
 import requests
 
 # Serial port configuration
-serial_port = "/dev/cu.usbmodem101"  # Adjust the port based on your system
+serial_port = "/dev/cu.usbmodem14301"  # Adjust the port based on your system
 baud_rate = 9600
 
 # Server configuration
@@ -35,11 +35,14 @@ try:
 
         # Save serial data to txt file
         save_to_txt(serial_data)
+        numbers = serial_data.split()
 
         # Download and save the image only when serial data is received
-        if serial_data:
+        if numbers[-1] == "1":
             download_image()
+            ser.write(b"ack\n") 
 
+        
 except KeyboardInterrupt:
     # Close the serial port on keyboard interrupt
     ser.close()

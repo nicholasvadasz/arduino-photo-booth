@@ -16,4 +16,4 @@ void toggleFilter();
 void updateLEDs();
 void photoLedOn();
 void photoLedOff();
-state updateFSM(state curState, long mils, action lastActionTaken);
+state updateFSM(state curState, long mils);

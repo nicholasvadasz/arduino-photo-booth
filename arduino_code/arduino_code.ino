@@ -1,13 +1,13 @@
-#include <avr/wdt.h>
 #include "arduino_code.h"
 
 const int toggleFilterButtonPin = 0;         // Button connected to digital pin 0
 const int takePhotoButtonPin = 1;            // Another button connected to digital pin 1
 const int brightnessPotentiometerPin = A1;   // Potentiometer 1 connected to analog pin A1
-const int saturationPotentiometer2Pin = A2;  // Potentiometer 2 connected to analog pin A2
+const int saturationPotentiometerPin = A2;  // Potentiometer 2 connected to analog pin A2
 const int brightnessLedPin = 6;              // LED connected to digital pin 6
-const int saturationLedPin = 5;              // LED connected to digital pin 5
-const int takingPhotoLedPin = 4;             // LED connected to digital pin 4
+const int saturationLedPin = 7;              // LED connected to digital pin 5
+const int takingPhotoLedPin = 8;    
+    // LED connected to digital pin 4
 
 bool takePhoto = false;
 bool renderDone = false;
@@ -16,9 +16,11 @@ filter currFilterSetting = NO_FILTER;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(buttonPin1, INPUT);
-  pinMode(buttonPin2, INPUT);
-  pinMode(ledPin, OUTPUT);
+  pinMode(toggleFilterButtonPin, INPUT);
+  pinMode(takePhotoButtonPin, INPUT);
+  pinMode(brightnessLedPin, OUTPUT);
+  pinMode(saturationLedPin, OUTPUT);
+  pinMode(takingPhotoLedPin, OUTPUT);
 }
 
 void loop() {
@@ -30,7 +32,7 @@ void loop() {
     toggleFilter();
   }
   updateLEDs();
-  CURRENT_STATE = updateFSM(CURRENT_STATE, millis(), s_last_action);
+  CURRENT_STATE = updateFSM(CURRENT_STATE, millis());
   delay(10);
 }
 
@@ -72,7 +74,7 @@ void photoLedOff() {
   digitalWrite(takingPhotoLedPin, LOW);
 }
 
-state updateFSM(state curState, unsigned long mils, action lastActionTaken) {
+state updateFSM(state curState, unsigned long mils) {
   state nextState = curState;
   switch(curState) {
     case sWAIT_FOR_INPUT:
@@ -80,20 +82,26 @@ state updateFSM(state curState, unsigned long mils, action lastActionTaken) {
         // flash LED to indicate picture taken
         photoLedOn();
         // send data to 
-        Serial.print(currFilterSetting));
+        Serial.print(currFilterSetting);
         Serial.print(" ");
         Serial.print(analogRead(brightnessPotentiometerPin));
         Serial.print(" ");
-        Serial.println(analogRead(saturationPotentiometerPin));
+        Serial.print(analogRead(saturationPotentiometerPin));
         Serial.print(" ");
-        Serial.print(1);
+        Serial.println(1);
         takePhoto = false;
         firstPhoto = false;
         nextState = sCOMMUNICATING;
       } else {
         if (!firstPhoto) {
-          // chris' stuff to update photo already taken
-        }
+          Serial.print(currFilterSetting);
+          Serial.print(" ");
+          Serial.print(analogRead(brightnessPotentiometerPin));
+          Serial.print(" ");
+          Serial.print(analogRead(saturationPotentiometerPin));
+          Serial.print(" ");
+          Serial.println(0);
+          }
         nextState = sWAIT_FOR_INPUT;
       }
       break;
