@@ -38,7 +38,7 @@ try:
         numbers = serial_data.split()
 
         # Download and save the image only when serial data is received
-        if numbers[-1] == "1":
+        if numbers[-2] == "1":
             download_image()
             ser.write(b"ack\n") 
 
