@@ -11,7 +11,7 @@ function App() {
     fetch("/variables.txt")
       .then((response) => response.text())
       .then((text) => {
-        const variables = text.split(",");
+        const variables = text.split(" ");
         setVariables([variables[0] as unknown as number, variables[1] as unknown as number]);
         setVersion(variables[2].trim());
       });
