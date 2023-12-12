@@ -2,7 +2,7 @@ import serial
 import requests
 
 # Serial port configuration
-serial_port = "/dev/cu.usbmodem14301"  # Adjust the port based on your system
+serial_port = "/dev/cu.usbmodem14401"  # Adjust the port based on your system
 baud_rate = 9600
 
 # Server configuration
