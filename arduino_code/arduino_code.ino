@@ -4,13 +4,12 @@
 const int toggleFilterButtonPin = 0;         // Button connected to digital pin 0
 const int takePhotoButtonPin = 1;            // Another button connected to digital pin 1
 const int brightnessPotentiometerPin = A1;   // Potentiometer 1 connected to analog pin A1
-const int saturationPotentiometerPin = A2;  // Potentiometer 2 connected to analog pin A2
+const int saturationPotentiometerPin = A2;   // Potentiometer 2 connected to analog pin A2
 const int brightnessLedPin = 6;              // LED connected to digital pin 6
-const int saturationLedPin = 7;              // LED connected to digital pin 5
-const int takingPhotoLedPin = 8;   
+const int saturationLedPin = 7;              // LED connected to digital pin 7
+const int takingPhotoLedPin = 8;             // LED connected to digital pin 8
 unsigned long lastStateChangeTime = 0;
-const int stateTimeout = 30000;   
-    // LED connected to digital pin 4
+const int stateTimeout = 60000;   
 
 bool takePhoto = false;
 bool renderDone = false;
