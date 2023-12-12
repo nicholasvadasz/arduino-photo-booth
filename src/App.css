@@ -28,11 +28,12 @@
 }
 
 .rowOfThings {
-  margin-top: 10px;
-  width: 50vw;
+  margin-left: 85px;
+  margin-top: 20px;
+  width: 70vw;
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .retrieveButton {
