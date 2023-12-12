@@ -15,6 +15,8 @@ function App() {
         return "sepia";
       case 3:
         return "blur";
+      case 4:
+        return "invert";
       default:
         return "no filter";
     }
@@ -30,6 +32,7 @@ function App() {
     height: "100%",
     filter: version === 'grayscale' ? 'grayscale(100%) brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')' :
             version === 'sepia' ? 'sepia(100%) brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')' :
+            version === 'invert' ? 'invert(100%) brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')' :
             version === 'blur' ? 'blur(5px) brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')' : 'brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')'
   };
 
@@ -49,6 +52,10 @@ function App() {
       });
     };
 
+  const refreshPage = () => {
+      window.location.reload();
+  } 
+
   return (
     <div className="App">
       <h1 style={{ fontFamily: "Comic Sans MS" }}>ARDUINO PHOTOBOOTH</h1>
@@ -63,6 +70,7 @@ function App() {
           <h3>Current Filter: {version}</h3>
           <h3>Brightness: {variables[0] / 500}</h3>
           <h3>Saturation: {variables[1] / 500}</h3>
+          <button onClick={refreshPage} className="retrieveButton">Retrieve Image</button>
       </div>
     </div>
   );

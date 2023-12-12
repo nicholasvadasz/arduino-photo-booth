@@ -29,8 +29,21 @@
 
 .rowOfThings {
   margin-top: 10px;
-  width: 40vw;
+  width: 50vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 2rem;
+}
+
+.retrieveButton {
+  margin-top: 10px;
+  width: 10vw;
+  height: 5vh;
+  background-color: rgb(65, 40, 16);
+  border: 2px solid rgb(24, 19, 13);
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  cursor: pointer;
 }
