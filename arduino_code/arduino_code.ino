@@ -120,6 +120,7 @@ state updateFSM(state curState, unsigned long mils) {
         firstPhoto = false;
         lastStateChangeTime = millis();
         nextState = sWAIT_FOR_ACK;
+        cat = false;
       } else {
         if (!firstPhoto) {
           if (cat) {

@@ -2,7 +2,7 @@ import serial
 import requests
 
 # Serial port configuration
-serial_port = "/dev/cu.usbmodem14401"  # Adjust the port based on your system
+serial_port = "/dev/cu.usbmodem101"  # Adjust the port based on your system
 baud_rate = 9600
 
 # Server configuration
@@ -14,7 +14,7 @@ url = "/capture.jpg"
 ser = serial.Serial(serial_port, baud_rate)
 
 def save_to_txt(data):
-    with open("public/variables.txt", "w") as file:
+    with open("build/variables.txt", "w") as file:
         file.write(data + "\n")
 
 def download_image():
@@ -22,7 +22,7 @@ def download_image():
     response = requests.get(full_url)
     
     if response.status_code == 200:
-        with open("public/image.jpg", "wb") as image_file:
+        with open("build/image.jpg", "wb") as image_file:
             image_file.write(response.content)
         print("Image downloaded and saved.")
     else:
