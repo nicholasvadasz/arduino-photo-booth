@@ -118,6 +118,7 @@ state updateFSM(state curState, unsigned long mils) {
         Serial.println(0);
         takePhoto = false;
         firstPhoto = false;
+        lastStateChangeTime = millis();
         nextState = sWAIT_FOR_ACK;
       } else {
         if (!firstPhoto) {
