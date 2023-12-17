@@ -1,3 +1,5 @@
+#include "arduino_code.h"
+
 bool testTransition1_1() {
   state expectedState = sWAIT_FOR_INPUT;
   state actualState = updateFSM(sWAIT_FOR_INPUT);

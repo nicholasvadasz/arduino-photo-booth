@@ -48,6 +48,7 @@ void loop() {
   }
 }
 
+// toggle filter helper method used to cycle through the different filters
 filter toggleFilter(filter currFilterSetting) {
   switch(currFilterSetting){
     case GRAYSCALE_FILTER:
@@ -71,6 +72,7 @@ filter toggleFilter(filter currFilterSetting) {
   }
 }
 
+// ISR to send a message to server to display a cat picture
 void catISR(){
   Serial.print(currFilterSetting);
   Serial.print(" ");
@@ -84,6 +86,7 @@ void catISR(){
   cat = true;
 }
 
+// update the LEDs to reflect the current brightness and saturation settings
 void updateLEDs() {
   int brightnessLedBrightness = map(analogRead(brightnessPotentiometerPin), 0, 1023, 0, 255);
   analogWrite(brightnessLedPin, brightnessLedBrightness);
@@ -91,14 +94,17 @@ void updateLEDs() {
   analogWrite(saturationLedPin, saturationLedBrightness);
 }
 
+// turn on the LED to indicate that a photo is being taken
 void photoLedOn() {
   digitalWrite(takingPhotoLedPin, HIGH);
 }
 
+// turn off the LED to indicate that a photo is no longer being taken
 void photoLedOff() {
   digitalWrite(takingPhotoLedPin, LOW);
 }
 
+// update the FSM based on the current state
 state updateFSM(state curState) {
   state nextState = curState;
   switch(curState) {
@@ -121,7 +127,7 @@ state updateFSM(state curState) {
         lastStateChangeTime = millis();
         nextState = sWAIT_FOR_ACK;
         cat = false;
-      } else {
+      } else { // 1-1 Transition
         if (!firstPhoto) {
           if (cat) {
             Serial.print(currFilterSetting);
@@ -150,11 +156,11 @@ state updateFSM(state curState) {
       }
       break;
     case sWAIT_FOR_ACK:
-      if (renderDone) {
+      if (renderDone) { // 2-1 Transition
         photoLedOff();
         nextState = sWAIT_FOR_INPUT;
         renderDone = false; 
-      } else {
+      } else { // 2-2 Transition
         nextState = sWAIT_FOR_ACK;
         if (Serial.available() > 0){
           String receivedData = Serial.readStringUntil('\n');

@@ -7,6 +7,7 @@ function App() {
   const [version, setVersion] = useState("grayscale");
   const [imagePath, setImagePath] = useState("/image.jpg");
   
+  // maps the number from the arduino to the filter name
   const mapper = (value: number) => {
     switch (value) {
       case 1:
@@ -29,6 +30,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // sets the image style based on the filter and the brightness and saturation values
   const imageStyle = {
     width: "100%",
     height: "100%",
@@ -38,6 +40,7 @@ function App() {
             version === 'blur' ? 'blur(5px) brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')' : 'brightness(' + variables[0] / 500 + ') saturate(' + variables[1] / 500 + ')'
   };
 
+  // reads the variables from the text file
   const readFile = () => {
     fetch("/variables.txt")
       .then((response) => response.text())
@@ -54,12 +57,14 @@ function App() {
       });
     };
 
+  // refreshes the page
   const refreshPage = () => {
       window.location.reload();
   } 
 
   const imageRef = useRef();
 
+  // saves the image with the filters
   const saveImageWithFilters = () => {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");

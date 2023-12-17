@@ -6,10 +6,9 @@
 static const char* AP_SSID = "camera";
 static const char* AP_PASS = "password";
 
-
-
 WebServer server(80);
 
+// sends the captured image to the client
 void handleCapture() {
   auto img = esp32cam::capture();
   if (img == nullptr) {
@@ -21,7 +20,6 @@ void handleCapture() {
   WiFiClient client = server.client();
   img->writeTo(client);
 }
-
 
 void setup() {
   auto res = esp32cam::Resolution::find(1024, 768);
